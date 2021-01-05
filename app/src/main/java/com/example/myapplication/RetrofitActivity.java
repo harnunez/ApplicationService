@@ -5,17 +5,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.example.myapplication.adapter.PersonajeAdapter;
+import com.example.myapplication.model.Data;
 import com.example.myapplication.model.Personaje;
+import com.example.myapplication.services.WebServiceClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitActivity extends AppCompatActivity {
 
@@ -26,7 +33,7 @@ public class RetrofitActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private HttpLoggingInterceptor loggingInterceptor;
-    private OkHttpClient.Builder httpClienBuilder;
+    private OkHttpClient.Builder httpClientBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,28 @@ public class RetrofitActivity extends AppCompatActivity {
 
     private void lanzarPeticion() {
         loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClienBuilder = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
+        httpClientBuilder = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://swapi.dev/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClientBuilder.build())
+                .build();
+
+        WebServiceClient client = retrofit.create(WebServiceClient.class);
+        Call<Data> call =  client.getPersonajes();
+
+        call.enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                adapter.setData(response.body().getResults());
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+                Log.d("Error", "Error service getPersonaje" + t.getMessage());
+            }
+        });
+
     }
 
     private void setUpView() {
