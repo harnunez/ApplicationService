@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btRetrofit;
     Button btRetrofitOrdenado;
+    Button btDagger;
+    Button btDaggerOrdenado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +38,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RetrofitOrdenadoActivity.class));
             }
         });
+
+        btDagger = findViewById(R.id.btDagger);
+        btDagger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DaggerActivity.class));
+            }
+        });
+
+        btDaggerOrdenado = findViewById(R.id.btDaggerOrdenado);
+        btDaggerOrdenado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), DaggerActivityOrdenado.class));
+            }
+        });
+
     }
 }

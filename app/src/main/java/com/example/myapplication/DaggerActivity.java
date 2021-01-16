@@ -1,11 +1,11 @@
 package com.example.myapplication;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.myapplication.adapter.PersonajeAdapter;
 import com.example.myapplication.model.Data;
@@ -15,6 +15,8 @@ import com.example.myapplication.services.WebServiceClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -23,73 +25,42 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitOrdenadoActivity extends AppCompatActivity {
+public class DaggerActivity extends AppCompatActivity {
+
 
     private RecyclerView recyclerView;
     private PersonajeAdapter adapter;
     private List<Personaje> personajes;
 
-    private Retrofit retrofit;
-    private HttpLoggingInterceptor loggingInterceptor;
-    private OkHttpClient.Builder httpClientBuilder;
-
-    private WebServiceClient client;
+  //  @Inject
+    WebServiceClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_retrofit_ordenado);
-
+        setContentView(R.layout.activity_retrofit);
+        injectarDagger();
         setUpView();
         lanzarPeticion();
     }
 
-    private void lanzarPeticion() {
-        loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClientBuilder = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://swapi.dev/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClientBuilder.build())
-                .build();
+    private void injectarDagger(){
+     //   ((BaseApplication) getApplication()).getAppComponent().inject(this);
+    }
 
-        client = retrofit.create(WebServiceClient.class);
+    private void lanzarPeticion() {
+
         Call<Data> call =  client.getPersonajes();
 
         call.enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
                 adapter.setData(response.body().getResults());
-                List<Personaje> personajes = response.body().getResults();
-                nuevaPeticion(response.body().getNext(), personajes);
             }
 
             @Override
             public void onFailure(Call<Data> call, Throwable t) {
                 Log.d("Error", "Error service getPersonaje" + t.getMessage());
-            }
-        });
-
-    }
-
-    private void nuevaPeticion(String url, List<Personaje> personajes1) {
-        String[] endPoint = url.split("https://swapi.dev/api/");
-        Call<Data> call = client.getPersonajes(endPoint[0]);
-        System.out.println("entra");
-        call.enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
-                List<Personaje> personajesList = response.body().getResults();
-                personajes1.addAll(personajesList);
-
-                //Antes de hacer el setData ordena la lista =======================
-
-                adapter.setData(personajes1);
-            }
-
-            @Override
-            public void onFailure(Call<Data> call, Throwable t) {
-
             }
         });
 
@@ -104,4 +75,5 @@ public class RetrofitOrdenadoActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(lim);
         recyclerView.setAdapter(adapter);
     }
+
 }

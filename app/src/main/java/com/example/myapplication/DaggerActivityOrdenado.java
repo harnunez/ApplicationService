@@ -1,11 +1,11 @@
 package com.example.myapplication;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.myapplication.adapter.PersonajeAdapter;
 import com.example.myapplication.model.Data;
@@ -23,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitOrdenadoActivity extends AppCompatActivity {
+public class DaggerActivityOrdenado extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PersonajeAdapter adapter;
@@ -74,8 +74,8 @@ public class RetrofitOrdenadoActivity extends AppCompatActivity {
 
     private void nuevaPeticion(String url, List<Personaje> personajes1) {
         String[] endPoint = url.split("https://swapi.dev/api/");
-        Call<Data> call = client.getPersonajes(endPoint[0]);
-        System.out.println("entra");
+        Call<Data> call = client.getPersonajes(endPoint[1]);
+
         call.enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
