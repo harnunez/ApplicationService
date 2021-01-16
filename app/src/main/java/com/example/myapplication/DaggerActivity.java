@@ -32,7 +32,7 @@ public class DaggerActivity extends AppCompatActivity {
     private PersonajeAdapter adapter;
     private List<Personaje> personajes;
 
-  //  @Inject
+    @Inject
     WebServiceClient client;
 
     @Override
@@ -45,7 +45,7 @@ public class DaggerActivity extends AppCompatActivity {
     }
 
     private void injectarDagger(){
-     //   ((BaseApplication) getApplication()).getAppComponent().inject(this);
+        ((BaseApplication) getApplication()).getAppComponent().inject(this);
     }
 
     private void lanzarPeticion() {
