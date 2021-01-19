@@ -15,6 +15,8 @@ import com.example.myapplication.services.WebServiceClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -33,27 +35,24 @@ public class DaggerActivityOrdenado extends AppCompatActivity {
     private HttpLoggingInterceptor loggingInterceptor;
     private OkHttpClient.Builder httpClientBuilder;
 
-    private WebServiceClient client;
+    @Inject
+    public WebServiceClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit_ordenado);
-
+        injectarDagger();
         setUpView();
         lanzarPeticion();
     }
 
-    private void lanzarPeticion() {
-        loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClientBuilder = new OkHttpClient.Builder().addInterceptor(loggingInterceptor);
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://swapi.dev/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClientBuilder.build())
-                .build();
+    private void injectarDagger(){
+        ((BaseApplication) getApplication()).getAppComponent().inject(this);
+    }
 
-        client = retrofit.create(WebServiceClient.class);
+    private void lanzarPeticion() {
+
         Call<Data> call =  client.getPersonajes();
 
         call.enqueue(new Callback<Data>() {
@@ -74,7 +73,7 @@ public class DaggerActivityOrdenado extends AppCompatActivity {
 
     private void nuevaPeticion(String url, List<Personaje> personajes1) {
         String[] endPoint = url.split("https://swapi.dev/api/");
-        Call<Data> call = client.getPersonajes(endPoint[1]);
+        Call<Data> call = client.getPersonajes(endPoint[0]);
 
         call.enqueue(new Callback<Data>() {
             @Override

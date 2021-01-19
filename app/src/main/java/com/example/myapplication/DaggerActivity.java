@@ -51,7 +51,6 @@ public class DaggerActivity extends AppCompatActivity {
     private void lanzarPeticion() {
 
         Call<Data> call =  client.getPersonajes();
-
         call.enqueue(new Callback<Data>() {
             @Override
             public void onResponse(Call<Data> call, Response<Data> response) {
