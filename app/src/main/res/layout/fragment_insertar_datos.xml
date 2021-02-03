@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.InsertarDatosFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorBlack"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="4dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="Nombre: "
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/tvTextName"
+            android:hint="Nombre"
+            android:textColor="@color/white"
+            android:textColorHint="@color/colorYellow"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTextHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/tvTextName"
+            android:text="Estatura: "
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tvHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTextName"
+            android:layout_toRightOf="@+id/tvTextHeight"
+            android:hint="estatura"
+            android:textColor="@color/white"
+            android:textColorHint="@color/colorYellow"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_enviar_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="134dp"
+            android:backgroundTint="@color/colorBlue"
+            android:text="Pasar datos" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.MostarDatosFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+
+        android:id="@+id/txt_etiqueta_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="317dp"
+        android:text="Mi nombre es" />
+
+    <TextView
+
+        android:id="@+id/txt_valor_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="195dp"
+        android:layout_marginTop="317dp"
+        android:hint="nombre" />
+
+
+    <TextView
+
+        android:id="@+id/txt_etiqueta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="92dp"
+        android:text="Mi estatura es:" />
+
+    <TextView
+        android:id="@+id/txt_muestra_altura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/txt_etiqueta"
+        android:hint="estaturas" />
+
+    <Button
+        android:id="@+id/btn_irASaludo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginBottom="253dp"
+        android:text="Button" />
+
+
+</RelativeLayout>

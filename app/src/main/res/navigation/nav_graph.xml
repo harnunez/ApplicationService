@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/insertarDatosFragment">
+
+    <fragment
+        android:id="@+id/insertarDatosFragment"
+        android:name="com.example.myapplication.fragments.InsertarDatosFragment"
+        android:label="fragment_insertar_datos"
+        tools:layout="@layout/fragment_insertar_datos" >
+        <action
+            android:id="@+id/action_insertarDatosFragment_to_mostarDatosFragment"
+            app:destination="@id/mostarDatosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mostarDatosFragment"
+        android:name="com.example.myapplication.fragments.MostarDatosFragment"
+        android:label="fragment_mostar_datos"
+        tools:layout="@layout/fragment_mostar_datos" >
+        <action
+            android:id="@+id/action_mostarDatosFragment_to_despedidaFragment"
+            app:destination="@id/despedidaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/despedidaFragment"
+        android:name="com.example.myapplication.fragments.DespedidaFragment"
+        android:label="fragment_despedida"
+        tools:layout="@layout/fragment_despedida" />
+</navigation>

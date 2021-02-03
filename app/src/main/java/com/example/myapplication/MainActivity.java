@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btRetrofit;
@@ -15,10 +18,14 @@ public class MainActivity extends AppCompatActivity {
     Button btDaggerOrdenado;
     Button btRxList;
 
+    @BindView(R.id.btn_nav)
+    Button btnNavegacion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         setupView();
     }
@@ -64,5 +71,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnNavegacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), NavigationContainerActivity.class));
+            }
+        });
     }
 }

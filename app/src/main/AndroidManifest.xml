@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".RxActivityList"></activity>
+        <activity android:name=".NavigationContainerActivity"></activity>
+        <activity android:name=".RxActivityList" />
         <activity android:name=".RetrofitOrdenadoActivity" />
         <activity android:name=".RetrofitActivity" />
         <activity android:name=".DaggerActivity" />
